@@ -78,7 +78,7 @@ function titleScreen() {
   textAlign(CENTER);
   text('Jumping Dog', width * .01, height * .25);
   textSize(50);
-  text('Press "SPACE" To Play', width * .01, height * .78)
+  text('Press "SPACE" To Play', width * .01, height * .78);
 }
 
 function gameStage1() {
