@@ -11,6 +11,8 @@ Added wireframe(start screen) and changed play function to "SPACEBAR"
 
 Adding additional assets
 
+Make dog walk on ground
+
 4/23/2022:
 
 Attempt to fix player death bug where dog just keeps floating
