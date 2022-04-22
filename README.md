@@ -5,13 +5,15 @@ From the current point I'm at, 3.1, I want to remove the flappy bird clouds from
 
 4/22/2022:
 
+Added clouds
+
+Added wireframe and changed play function to "SPACEBAR"
+
 Adding additional assets
 
 Adding play button screen
 
 4/23/2022:
-
-Adding randomizer for clouds
 
 Attempting to bug fix the game over screen
 
