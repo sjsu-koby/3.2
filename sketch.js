@@ -31,7 +31,7 @@ function setup() {
   pipeImg = loadImage('assets/flappy_pipe.png');
   groundImg = loadImage('assets/flappy_ground.png');
   bgImg = loadImage('assets/flappy_bg.png');
-  bgS = loadImage('assets/bg_dog.jpg');
+  bgS = loadImage('assets/bg_dog.JPG');
 
   dog = createSprite(width / 2, height / 2.5, 40, 40);
   dog.rotateToDirection = true;
