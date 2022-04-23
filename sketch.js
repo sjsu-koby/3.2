@@ -2,7 +2,7 @@
 //mouse click or x to flap
 
 var GRAVITY = 0.3;
-var JUMP = -8;
+var JUMP = -9;
 var GROUND_Y = 450;
 var MIN_OPENING = 300;
 var dog, ground;
@@ -37,7 +37,7 @@ function setup() {
   dog.rotateToDirection = true;
   dog.velocity.x = 15;
   dog.setCollider('circle', 0, 0, 20);
-  dog.addAnimation('move', 'assets/jumping_dog1.png','assets/jumping_dog2.png','assets/jumping_dog3.png');
+  dog.addAnimation('move', 'assets/jumping_dog1.png', 'assets/jumping_dog2.png', 'assets/jumping_dog3.png');
 
   ground = createSprite(windowWidth, windowHeight - 100); //image 800x200
   ground.addImage(groundImg);
@@ -61,7 +61,7 @@ function draw() {
       gameOver();
       break;
   }
-  if(dog.collide(ground)){
+  if (dog.collide(ground)) {
     dog.velocity.y = 0;
   }
 }
@@ -103,7 +103,7 @@ function gameStage1() {
       die();
 
     //spawn rocks
-    if (frameCount % 80 == 0) {
+    if (frameCount % 90 == 0) {
       var rockH = (50, -60);
       var rock = createSprite(dog.position.x + width + random(width), GROUND_Y - rockH / 3 + 1 + 250, 80, rockH);
       rock.addImage(rockImg);
@@ -155,10 +155,13 @@ function newGame() {
 }
 
 function keyPressed() {
-  if (gameOver)
-    newGame();
-  dog.velocity.y = JUMP;
-  //dog.changeAnimation("jump");
+  if (keyCode === 32) {
+    if (gameOver)
+      newGame();
+    dog.velocity.y = JUMP;
+    //dog.changeAnimation("jump");
+  }
+
 }
 
 function gameStart() {
