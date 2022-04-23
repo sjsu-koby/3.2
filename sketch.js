@@ -2,13 +2,13 @@
 //mouse click or x to flap
 
 var GRAVITY = 0.3;
-var JUMP = -7;
+var JUMP = -8;
 var GROUND_Y = 450;
 var MIN_OPENING = 300;
 var dog, ground;
-var pipes;
+var rock;
 var gameOver;
-var dogImg, pipeImg, groundImg, bgImg, bgS;
+var dogImg, rockImg, groundImg, bgImg, bgS;
 var gameState = 'title';
 var clouds = [];
 var changeDirection = 0;
@@ -27,22 +27,22 @@ function setup() {
       random(4) * 0.8
     );
   }
-  dogImg = loadImage('assets/flappy_dog.png');
-  pipeImg = loadImage('assets/flappy_pipe.png');
+  dogImg = loadImage('assets/jumping_dog1.png');
+  rockImg = loadImage('assets/rock.png');
   groundImg = loadImage('assets/flappy_ground.png');
   bgImg = loadImage('assets/flappy_bg.png');
   bgS = loadImage('assets/bg_dog.JPG');
 
   dog = createSprite(width / 2, height / 2.5, 40, 40);
   dog.rotateToDirection = true;
-  dog.velocity.x = 4;
+  dog.velocity.x = 15;
   dog.setCollider('circle', 0, 0, 20);
-  dog.addImage(dogImg);
+  dog.addAnimation('move', 'assets/jumping_dog1.png','assets/jumping_dog2.png','assets/jumping_dog3.png');
 
   ground = createSprite(windowWidth, windowHeight - 100); //image 800x200
   ground.addImage(groundImg);
 
-  pipes = new Group();
+  rocks = new Group();
   gameOver = true;
   updateSprites(false);
 
@@ -61,13 +61,16 @@ function draw() {
       gameOver();
       break;
   }
+  if(dog.collide(ground)){
+    dog.velocity.y = 0;
+  }
 }
 
 function keyReleased() {
   if (gameState === 'title' || gameState === 'gameover') {
     if (key === ' ' || key === ' ') {
       gameState = 'lvl1';
-      image(bgS);
+      image(bgS, 0, 0);
     }
   }
 }
@@ -96,33 +99,22 @@ function gameStage1() {
     if (dog.position.y < 0)
       dog.position.y = 0;
 
-    if (dog.overlap(ground))
+    if (dog.overlap(rocks))
       die();
 
-    if (dog.overlap(pipes))
-      die();
+    //spawn rocks
+    if (frameCount % 80 == 0) {
+      var rockH = (50, -60);
+      var rock = createSprite(dog.position.x + width + random(width), GROUND_Y - rockH / 3 + 1 + 250, 80, rockH);
+      rock.addImage(rockImg);
+      rocks.add(rock);
 
-    //spawn pipes
-    if (frameCount % 60 == 0) {
-      var pipeH = random(50, -60);
-      var pipe = createSprite(dog.position.x + width, GROUND_Y - pipeH / 3 + 1 + 200, 80, pipeH);
-      pipe.addImage(pipeImg);
-      pipes.add(pipe);
-
-      //top pipe
-      if (pipeH < 200) {
-        pipeH = height - (height - GROUND_Y) - (pipeH + MIN_OPENING);
-        pipe = createSprite(dog.position.x + width, pipeH / 2 - 50, 200, pipeH);
-        pipe.mirrorY(-1);
-        pipe.addImage(pipeImg);
-        pipes.add(pipe);
-      }
     }
 
-    //get rid of passed pipes
-    for (var i = 0; i < pipes.length; i++)
-      if (pipes[i].position.x < dog.position.x - width / 2)
-        pipes[i].remove();
+    //get rid of passed rocks
+    for (var i = 0; i < rocks.length; i++)
+      if (rocks[i].position.x < dog.position.x - width / 2)
+        rocks[i].remove();
   }
 
   camera.position.x = dog.position.x + width / 4;
@@ -140,8 +132,8 @@ function gameStage1() {
   image(bgImg, 0, GROUND_Y - 170);
   camera.on();
 
-  drawSprites(pipes);
   drawSprite(ground);
+  drawSprites(rocks);
   drawSprite(dog);
 
 }
@@ -152,12 +144,12 @@ function die() {
 }
 
 function newGame() {
-  pipes.removeSprites();
+  rocks.removeSprites();
   gameOver = false;
   updateSprites(true);
   dog.position.x = width / 2;
-  dog.position.y = height / 2;
-  dog.velocity.y = 0;
+  dog.position.y = height / 1.3;
+  dog.velocity.y = 2;
   ground.position.x = windowWidth;
   ground.position.y = windowHeight - 100;
 }
@@ -166,6 +158,7 @@ function keyPressed() {
   if (gameOver)
     newGame();
   dog.velocity.y = JUMP;
+  //dog.changeAnimation("jump");
 }
 
 function gameStart() {
