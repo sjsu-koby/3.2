@@ -9,11 +9,12 @@ Added clouds
 
 Added wireframe(start screen) and changed play function to "SPACEBAR"
 
-Adding additional assets
+Added new assets
 
-Make dog walk on ground
 
 **4/23/2022:**
+
+Made dog walk on ground
 
 Attempt to fix player death bug where dog just keeps floating
 
