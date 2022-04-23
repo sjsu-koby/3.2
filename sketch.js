@@ -39,7 +39,7 @@ function setup() {
   dog.setCollider('circle', 0, 0, 20);
   dog.addAnimation('move', 'assets/jumping_dog1.png', 'assets/jumping_dog2.png', 'assets/jumping_dog3.png');
 
-  ground = createSprite(windowWidth, windowHeight - 100); //image 800x200
+  ground = createSprite(windowWidth, windowHeight + 100); //image 800x200
   ground.addImage(groundImg);
 
   rocks = new Group();
@@ -129,7 +129,7 @@ function gameStage1() {
     clouds[i].display();
     clouds[i].move();
   }
-  image(bgImg, 0, GROUND_Y - 170);
+  image(bgImg, 0, GROUND_Y - 160);
   camera.on();
 
   drawSprite(ground);
@@ -151,7 +151,7 @@ function newGame() {
   dog.position.y = height / 1.3;
   dog.velocity.y = 2;
   ground.position.x = windowWidth;
-  ground.position.y = windowHeight - 100;
+  ground.position.y = windowHeight - 110;
 }
 
 function keyPressed() {
