@@ -104,7 +104,7 @@ function gameStage1() {
 
     //spawn rocks
     if (frameCount % 90 == 0) {
-      var rockH = (50, -20);
+      var rockH = (50);
       var rock = createSprite(dog.position.x + width + random(width), GROUND_Y - rockH / 3 + 1 + 250, 80, rockH);
       rock.addImage(rockImg);
       rocks.add(rock);
