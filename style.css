@@ -23,7 +23,7 @@ h1 {
 .artistButton {
   position: fixed;
   left: 850px;
-  bottom: 450px;
+  bottom: 50px;
   font-size: 35px;
 }
 .artist {
