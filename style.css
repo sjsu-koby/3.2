@@ -1,7 +1,40 @@
+body {
+
+  display: flex;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  align-items: center;
+}
 html, body {
   margin: 0;
   padding: 0;
 }
 canvas {
   display: block;
+}
+h1 {
+  position: fixed;
+  top: 150px;
+  text-align: center;
+}
+.artistButton {
+  position: fixed;
+  left: 850px;
+  bottom: 450px;
+  font-size: 35px;
+}
+.artist {
+  margin-left: 0;
+  margin-top: 15%;
+  text-align: center;
+}
+.gameButton{
+
+  position: absolute;
+  left: 880px;
+  bottom: 500px;
+  font-size: 25px;
 }
