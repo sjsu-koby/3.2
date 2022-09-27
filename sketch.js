@@ -32,6 +32,7 @@ function setup() {
   groundImg = loadImage('assets/flappy_ground.png');
   bgImg = loadImage('assets/flappy_bg.png');
   bgS = loadImage('assets/bg_dog.JPG');
+  endBg = loadImage('assets/endbg.png');
 
   dog = createSprite(width / 2, height / 2.5, 40, 40);
   dog.rotateToDirection = true;
@@ -57,9 +58,12 @@ function draw() {
     case 'lvl1':
       gameStage1();
       break;
-    case 'gameOver':
-      gameOver();
+    case 'gameover':
+      youDied();
       break;
+    //case 'gameOver':
+    //  gameOver();
+    //  break;
   }
   if (dog.collide(ground)) {
     dog.velocity.y = 0;
@@ -139,8 +143,17 @@ function gameStage1() {
 }
 
 function die() {
-  updateSprites(false);
+  if (gameState === 'lvl1' || gameState === 'title') {
+  gameState = 'gameover';
+  }
+  //updateSprites(false);
+  //gameOver = true;
+}
+
+function youDied() {
   gameOver = true;
+  updateSprites(false);
+  background(endBg);
 }
 
 function newGame() {
